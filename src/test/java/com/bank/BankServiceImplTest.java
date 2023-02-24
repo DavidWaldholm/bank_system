@@ -12,15 +12,15 @@ public class BankServiceImplTest {
     @Before
     public void initialize() {
         bankService = new BankServiceImpl();
-        bankAccount = new BankAccount("David", "1");
+        bankAccount = new BankAccount("David", "2");
     }
 
 
     @Test
     public void testWithdrawNormal() {
-        bankAccount.setBalance(200.0);
+        bankAccount.setBalance(300.0);
         bankService.withdraw(bankAccount, 100.0);
-        Assertions.assertEquals(100.0, bankAccount.getBalance());
+        Assertions.assertEquals(200.0, bankAccount.getBalance());
         Assertions.assertEquals(-100.0, bankAccount.getPrevTrans());
 
 
@@ -29,7 +29,7 @@ public class BankServiceImplTest {
     @Test
     public void testWithdrawBiggerAmountThanCurrentBalance() {
         bankAccount.setBalance(200.0);
-        bankService.withdraw(bankAccount, 210.0);
+        bankService.withdraw(bankAccount, 300.0);
         Assertions.assertEquals(200.0, bankAccount.getBalance());
 
 
@@ -47,9 +47,9 @@ public class BankServiceImplTest {
 
     @Test
     public void testDepositWithNegativeAmount() {
-        bankService.deposit(bankAccount, 200.0);
-        bankService.deposit(bankAccount, -200.0);
-        Assertions.assertEquals(200, bankAccount.getBalance());
+        bankService.deposit(bankAccount, 100.0);
+        bankService.deposit(bankAccount, -100.0);
+        Assertions.assertEquals(100, bankAccount.getBalance());
 
     }
 
